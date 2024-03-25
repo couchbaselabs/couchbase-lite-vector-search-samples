@@ -1,1 +1,1 @@
-# couchbase-lite-vector-search-sample
+## Couchbase Lite Vector Search Sample Apps
