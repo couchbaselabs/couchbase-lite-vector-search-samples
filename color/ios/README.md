@@ -1,5 +1,3 @@
-@import "Overview.md"
-
 ### Prerequisites ###
 
 To run this project, you will need:
