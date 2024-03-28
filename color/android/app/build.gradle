@@ -48,8 +48,8 @@ android {
 
 dependencies {
     // Couchbase Lite:
-    implementation 'com.couchbase.lite:couchbase-lite-android-ee-ktx:3.2.0-77'
-    implementation 'com.couchbase.lite:couchbase-lite-android-vector-search-arm64:1.0.0-7'
+    implementation 'com.couchbase.lite:couchbase-lite-android-ee-ktx:3.2.0-beta.1'
+    implementation 'com.couchbase.lite:couchbase-lite-android-vector-search-arm64:1.0.0-beta.1'
 
     // Dependency injection
     implementation "io.insert-koin:koin-core:3.3.3"

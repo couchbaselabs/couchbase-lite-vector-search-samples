@@ -10,7 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://proget.sc.couchbase.com/maven2/internalmaven' }
+        maven { url 'https://mobile.maven.couchbase.com/maven2/dev' }
     }
 }
 
