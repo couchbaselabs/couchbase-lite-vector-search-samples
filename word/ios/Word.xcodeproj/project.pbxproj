@@ -13,29 +13,12 @@
 		4001A1912BB267C60067B507 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4001A1902BB267C60067B507 /* Preview Assets.xcassets */; };
 		4001A1982BB2684F0067B507 /* Dataset in Resources */ = {isa = PBXBuildFile; fileRef = 4001A1972BB2684F0067B507 /* Dataset */; };
 		4001A19D2BB268A50067B507 /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4001A19C2BB268A50067B507 /* AppService.swift */; };
-		4001A1A12BB268CE0067B507 /* CouchbaseLiteSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4001A19F2BB268CE0067B507 /* CouchbaseLiteSwift.xcframework */; };
-		4001A1A22BB268CE0067B507 /* CouchbaseLiteSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4001A19F2BB268CE0067B507 /* CouchbaseLiteSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4001A1A32BB268CE0067B507 /* CouchbaseLiteVectorSearch.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4001A1A02BB268CE0067B507 /* CouchbaseLiteVectorSearch.xcframework */; };
-		4001A1A42BB268CE0067B507 /* CouchbaseLiteVectorSearch.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4001A1A02BB268CE0067B507 /* CouchbaseLiteVectorSearch.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4001A1A92BB269D10067B507 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4001A1A82BB269D10067B507 /* Extensions.swift */; };
 		4001A1AE2BB26BCD0067B507 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4001A1AD2BB26BCD0067B507 /* ContentViewModel.swift */; };
 		4001A1B02BB26C8F0067B507 /* WordRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4001A1AF2BB26C8F0067B507 /* WordRow.swift */; };
+		4001A2042BB505170067B507 /* CouchbaseLiteSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4001A2032BB505170067B507 /* CouchbaseLiteSwift */; };
+		4001A2072BB505370067B507 /* CouchbaseLiteVectorSearch in Frameworks */ = {isa = PBXBuildFile; productRef = 4001A2062BB505370067B507 /* CouchbaseLiteVectorSearch */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		4001A1A52BB268CE0067B507 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				4001A1A42BB268CE0067B507 /* CouchbaseLiteVectorSearch.xcframework in Embed Frameworks */,
-				4001A1A22BB268CE0067B507 /* CouchbaseLiteSwift.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4001A1862BB267C40067B507 /* Word.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Word.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,8 +28,6 @@
 		4001A1902BB267C60067B507 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4001A1972BB2684F0067B507 /* Dataset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Dataset; sourceTree = "<group>"; };
 		4001A19C2BB268A50067B507 /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
-		4001A19F2BB268CE0067B507 /* CouchbaseLiteSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CouchbaseLiteSwift.xcframework; path = Frameworks/CouchbaseLiteSwift.xcframework; sourceTree = "<group>"; };
-		4001A1A02BB268CE0067B507 /* CouchbaseLiteVectorSearch.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CouchbaseLiteVectorSearch.xcframework; path = Frameworks/CouchbaseLiteVectorSearch.xcframework; sourceTree = "<group>"; };
 		4001A1A82BB269D10067B507 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4001A1AD2BB26BCD0067B507 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		4001A1AF2BB26C8F0067B507 /* WordRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordRow.swift; sourceTree = "<group>"; };
@@ -57,8 +38,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4001A1A32BB268CE0067B507 /* CouchbaseLiteVectorSearch.xcframework in Frameworks */,
-				4001A1A12BB268CE0067B507 /* CouchbaseLiteSwift.xcframework in Frameworks */,
+				4001A2042BB505170067B507 /* CouchbaseLiteSwift in Frameworks */,
+				4001A2072BB505370067B507 /* CouchbaseLiteVectorSearch in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,7 +51,6 @@
 			children = (
 				4001A1882BB267C40067B507 /* Word */,
 				4001A1872BB267C40067B507 /* Products */,
-				4001A19E2BB268CE0067B507 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,15 +110,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		4001A19E2BB268CE0067B507 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				4001A19F2BB268CE0067B507 /* CouchbaseLiteSwift.xcframework */,
-				4001A1A02BB268CE0067B507 /* CouchbaseLiteVectorSearch.xcframework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		4001A1A62BB269A40067B507 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,13 +128,16 @@
 				4001A1822BB267C40067B507 /* Sources */,
 				4001A1832BB267C40067B507 /* Frameworks */,
 				4001A1842BB267C40067B507 /* Resources */,
-				4001A1A52BB268CE0067B507 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Word;
+			packageProductDependencies = (
+				4001A2032BB505170067B507 /* CouchbaseLiteSwift */,
+				4001A2062BB505370067B507 /* CouchbaseLiteVectorSearch */,
+			);
 			productName = Word;
 			productReference = 4001A1862BB267C40067B507 /* Word.app */;
 			productType = "com.apple.product-type.application";
@@ -192,6 +166,10 @@
 				Base,
 			);
 			mainGroup = 4001A17D2BB267C40067B507;
+			packageReferences = (
+				4001A2022BB505170067B507 /* XCRemoteSwiftPackageReference "couchbase-lite-swift-ee" */,
+				4001A2052BB505370067B507 /* XCRemoteSwiftPackageReference "couchbase-lite-ios-vector-search-spm" */,
+			);
 			productRefGroup = 4001A1872BB267C40067B507 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -430,6 +408,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4001A2022BB505170067B507 /* XCRemoteSwiftPackageReference "couchbase-lite-swift-ee" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/couchbase/couchbase-lite-swift-ee.git";
+			requirement = {
+				kind = exactVersion;
+				version = "3.2.0-beta.1";
+			};
+		};
+		4001A2052BB505370067B507 /* XCRemoteSwiftPackageReference "couchbase-lite-ios-vector-search-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/couchbase/couchbase-lite-ios-vector-search-spm/";
+			requirement = {
+				kind = exactVersion;
+				version = "1.0.0-beta.1";
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4001A2032BB505170067B507 /* CouchbaseLiteSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4001A2022BB505170067B507 /* XCRemoteSwiftPackageReference "couchbase-lite-swift-ee" */;
+			productName = CouchbaseLiteSwift;
+		};
+		4001A2062BB505370067B507 /* CouchbaseLiteVectorSearch */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4001A2052BB505370067B507 /* XCRemoteSwiftPackageReference "couchbase-lite-ios-vector-search-spm" */;
+			productName = CouchbaseLiteVectorSearch;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4001A17E2BB267C40067B507 /* Project object */;
 }
