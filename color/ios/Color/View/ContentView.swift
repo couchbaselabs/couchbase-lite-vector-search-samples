@@ -31,7 +31,7 @@ struct ContentView: View {
     @FocusState private var isFocused :Bool
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack(alignment: .leading) {
                 HStack {
                     HStack {
