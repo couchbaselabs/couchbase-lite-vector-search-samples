@@ -22,7 +22,7 @@
                 android:layout_weight="1"
                 android:closeIcon="@color/white"
                 android:queryBackground="@null"
-                android:queryHint="Color (FF0000 or 255 0 0)" />
+                android:queryHint="Enter Color (FF0000 or 255 0 0)" />
             <View
                 android:id="@+id/colorView"
                 android:layout_width="40dp"

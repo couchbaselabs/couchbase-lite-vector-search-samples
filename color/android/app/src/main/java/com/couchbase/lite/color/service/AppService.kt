@@ -46,7 +46,7 @@ class AppService (private val context: Context) {
 
     private var db: Database? = null
     private lateinit var collection: Collection
-    private lateinit var query: Query
+    private var query: Query? = null
 
     companion object {
         fun init(context: Context) {
@@ -76,6 +76,7 @@ class AppService (private val context: Context) {
         // Check if the database is initialized:
         checkInitialized()
 
+        // Create the query object:
         if (query == null) {
             val sql = "SELECT id, color, colorvect_l2, VECTOR_DISTANCE($INDEX_NAME) " +
                     "FROM $COLLECTION_NAME " +
@@ -86,11 +87,11 @@ class AppService (private val context: Context) {
         // Set $vector parameter on the query:
         val params = Parameters()
         params.setArray("vector", MutableArray(color))
-        query.parameters = params
+        query!!.parameters = params
 
         // Execute search and return result:
         val colors = mutableListOf<ColorObject>()
-        query.execute().use { rs ->
+        query!!.execute().use { rs ->
             for (result in rs) {
                 val id = result.getString(0)!!
                 val name = result.getString(1)!!

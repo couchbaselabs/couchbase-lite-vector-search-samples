@@ -23,7 +23,7 @@ struct ContentView: View {
     @EnvironmentObject private var model: ContentViewModel
     
     @State var searchColor = ""
-    @State var displayColor = Color(.white)
+    @State var displayColor = Color.white
     
     @State private var displayError = false
     @State private var errorMessage = ""
@@ -35,8 +35,9 @@ struct ContentView: View {
             VStack(alignment: .leading) {
                 HStack {
                     HStack {
-                        TextField("Color Code (FF0000 or 255 0 0)", text: $searchColor)
-                            .frame(height: 44).padding(.horizontal, 10)
+                        TextField("Enter Color (FF0000 or 255 0 0)", text: $searchColor)
+                            .padding(.leading, 10).padding(.trailing, 5)
+                            .textFieldStyle(.roundedBorder)
                             .textInputAutocapitalization(.characters)
                             .autocorrectionDisabled()
                             .focused($isFocused)
@@ -50,7 +51,7 @@ struct ContentView: View {
                     .background(Color.white)
                     
                     Text("")
-                        .frame(width: 44, height: 44)
+                        .frame(width: 34, height: 34)
                         .background(displayColor)
                 }
                 .padding(10)

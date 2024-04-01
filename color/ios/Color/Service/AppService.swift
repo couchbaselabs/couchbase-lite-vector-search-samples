@@ -77,7 +77,7 @@ actor AppService {
         params.setValue(color, forName: "vector")
         query.parameters = params
         
-        // Execute search:
+        // Execute the query:
         let results = try query.execute()
         
         // Return results:
