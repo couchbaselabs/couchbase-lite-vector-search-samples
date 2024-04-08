@@ -1,0 +1,14 @@
+
+### Mac OS ###
+.DS_Store
+
+### Gradle
+.gradle
+build/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
