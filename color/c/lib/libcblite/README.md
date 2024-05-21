@@ -1,0 +1,1 @@
+Copy Couchbase Lite library here. This directory should include `lib` and `include` directory.

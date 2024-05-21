@@ -1,0 +1,1 @@
+Copy CouchbaseLiteVectorSearch shared library here.
