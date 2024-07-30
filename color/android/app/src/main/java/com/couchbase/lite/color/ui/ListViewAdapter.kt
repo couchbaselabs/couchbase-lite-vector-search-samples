@@ -17,51 +17,40 @@
 package com.couchbase.lite.color.ui
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.couchbase.lite.color.R
-import com.couchbase.lite.color.service.ColorObject
+import com.couchbase.lite.color.service.NamedColor
 
 class ListViewAdapter : RecyclerView.Adapter<ListViewAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val colorView : View
-        val idTextView: TextView
-        val nameTextView: TextView
-        val distanceTextView: TextView
-        init {
-            colorView = itemView.findViewById(R.id.colorView)
-            idTextView = itemView.findViewById(R.id.idTextView)
-            nameTextView = itemView.findViewById(R.id.nameTextView)
-            distanceTextView = itemView.findViewById(R.id.distanceTextView)
-        }
+        val colorView: View = itemView.findViewById(R.id.itemColor)
+        val idView: TextView = itemView.findViewById(R.id.itemId)
+        val nameView: TextView = itemView.findViewById(R.id.itemName)
+        val distanceView: TextView = itemView.findViewById(R.id.itemDistance)
     }
 
-    private var items: List<ColorObject> = emptyList()
+    private var items: List<NamedColor> = emptyList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context) .inflate(R.layout.list_item, parent, false)
-        return ViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false))
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount() = items.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val color = items[position]
-        val rgb = color.rgb
-        holder.colorView.setBackgroundColor(Color.rgb(rgb[0], rgb[1], rgb[2]))
-        holder.idTextView.text = color.id
-        holder.nameTextView.text = color.name
-        holder.distanceTextView.text = String.format("%.0f", color.distance)
+    override fun onBindViewHolder(holder: ViewHolder, p: Int) {
+        if ((p < 0) || (p >= items.size)) return
+        val item = items[p]
+        holder.colorView.setBackgroundColor(item.color.asInt())
+        holder.idView.text = item.id
+        holder.nameView.text = item.name
+        holder.distanceView.text = item.distance.toString()
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateItems(items: List<ColorObject> ) {
+    fun updateItems(items: List<NamedColor>) {
         this.items = items
         notifyDataSetChanged()
     }

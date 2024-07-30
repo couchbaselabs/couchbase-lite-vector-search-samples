@@ -58,8 +58,11 @@ public final class DBService {
         if (db != null) { return this; }
 
         workDir = initCBL();
+        CouchbaseLite.enableVectorSearch();
         initLogging(workDir);
+
         db = initDb(workDir);
+
         this.db = db;
 
         final Collection coll = db.getCollection("colors");
@@ -83,9 +86,11 @@ public final class DBService {
     public List<NamedColor> search(@NonNull final Color color) throws CouchbaseLiteException {
         if (this.db == null) { throw new IllegalStateException("Database is not ready"); }
 
-        final Query q = db.createQuery("SELECT id, color, colorvect_l2, VECTOR_DISTANCE(colors_index) as dist"
-            + " FROM colors"
-            + " WHERE vector_match(colors_index, $vector , 8)");
+        final Query q = db.createQuery(
+            "SELECT id, color, colorvect_l2, APPROX_VECTOR_DISTANCE(colorvect_l2, $vector) as dist" +
+                " FROM colors" +
+                " ORDER BY APPROX_VECTOR_DISTANCE(colorvect_l2, $vector)" +
+                " LIMIT 8");
 
         final Parameters params = new Parameters();
         params.setArray("vector", new MutableArray(color.getRGBVector()));
@@ -100,7 +105,7 @@ public final class DBService {
                 final String name = result.getString("color");
                 if (name == null) { continue; }
 
-                final double distance = result.getDouble("dist");
+                final int distance = result.getInt("dist");
 
                 final Array rgb = result.getArray("colorvect_l2");
                 if ((rgb == null) || (rgb.count() != 3)) { continue; }
@@ -116,8 +121,6 @@ public final class DBService {
                 catch (Color.ColorSpecException ignore) { }
             }
         }
-
-        Collections.sort(colors);
 
         return colors;
     }

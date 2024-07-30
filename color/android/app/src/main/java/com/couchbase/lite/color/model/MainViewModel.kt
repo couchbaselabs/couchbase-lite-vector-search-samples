@@ -19,46 +19,62 @@ package com.couchbase.lite.color.model
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.couchbase.lite.color.service.ColorObject
 import com.couchbase.lite.color.service.AppService
+import com.couchbase.lite.color.service.Color
+import com.couchbase.lite.color.service.NamedColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val service: AppService) : ViewModel() {
-    val serviceStatus = MutableLiveData(ServiceStatus(false, null))
+enum class ServiceStatus { Stopped, Ready, Failed }
 
-    val searchResult = MutableLiveData(SearchResult(emptyList(), null))
-
-    fun init() {
-        viewModelScope.launch(Dispatchers.IO) {
-            var error: String? = null
-            try {
-                service.initialize()
-            } catch (e: Exception) {
-                error = getErrorMessage(e)
-            }
-            serviceStatus.postValue(ServiceStatus(error == null, error))
-        }
-    }
-
-    fun search(color: List<Int>) {
-        viewModelScope.launch(Dispatchers.IO) {
-            var colors: List<ColorObject>? = null
-            var error: String? = null
-            try {
-                colors = service.search(color)
-            } catch (e: Exception) {
-                error = getErrorMessage(e)
-            }
-            searchResult.postValue(SearchResult(colors, error))
-        }
-    }
-
-    private fun getErrorMessage(e: Exception): String {
-        return if (e.message != null) e.message!! else "Unknown Error"
-    }
+sealed class SearchResult(val colors: List<NamedColor> = emptyList(), val error: String = "") {
+    data object None : SearchResult()
+    class Success(colors: List<NamedColor>) : SearchResult(colors = colors)
+    class Failed(err: Exception) : SearchResult(error = err.message ?: "Unexpected error")
 }
 
-data class ServiceStatus(val ready: Boolean, val error: String?)
 
-data class SearchResult(val colors: List<ColorObject>?, val error: String?)
+class MainViewModel(private val service: AppService) : ViewModel() {
+    val serviceStatus = MutableLiveData(ServiceStatus.Stopped)
+    val searchResult = MutableLiveData<SearchResult>(SearchResult.None)
+
+    fun start() {
+        if (serviceStatus.value == ServiceStatus.Ready) {
+            return
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                service.start()
+                serviceStatus.postValue(ServiceStatus.Ready)
+            } catch (e: Exception) {
+                serviceStatus.postValue(ServiceStatus.Failed)
+                searchResult.postValue(SearchResult.Failed(e))
+            }
+        }
+    }
+
+    fun search(query: String): Color? {
+        val color: Color
+        try {
+            color = Color.parse(query)
+        } catch (e: Exception) {
+            searchResult.postValue(SearchResult.Failed(e))
+            return null
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                searchResult.postValue(SearchResult.Success(service.search(color)))
+            } catch (e: Exception) {
+                searchResult.postValue(SearchResult.Failed(e))
+            }
+        }
+        return color
+    }
+
+    fun stop() {
+        viewModelScope.launch(Dispatchers.IO) { service.stop() }
+        serviceStatus.postValue(ServiceStatus.Stopped)
+    }
+}

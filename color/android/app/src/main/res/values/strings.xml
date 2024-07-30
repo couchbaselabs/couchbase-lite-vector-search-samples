@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Color</string>
+    <string name="queryHint">#FF0000 | 255 0 0</string>
+    <string name="colorLabel">Color:</string>
+    <string name="stopped">Stopped</string>
+    <string name="ready">Ready</string>
+    <string name="failed">Failed</string>
 </resources>

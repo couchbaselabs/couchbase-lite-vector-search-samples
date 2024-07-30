@@ -16,19 +16,18 @@
 
 package com.couchbase.lite.color
 
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.couchbase.lite.color.databinding.ActivityMainBinding
 import com.couchbase.lite.color.model.MainViewModel
 import com.couchbase.lite.color.model.SearchResult
 import com.couchbase.lite.color.model.ServiceStatus
+import com.couchbase.lite.color.service.NamedColor
 import com.couchbase.lite.color.ui.ListViewAdapter
-import com.couchbase.lite.color.util.RGB
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -49,29 +48,23 @@ class MainActivity : AppCompatActivity() {
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         listView.layoutManager = layoutManager
 
-        val decoration = DividerItemDecoration(listView.context, layoutManager.orientation)
-        listView.addItemDecoration(decoration)
+        val separator = DividerItemDecoration(listView.context, layoutManager.orientation)
+        separator.setDrawable(ContextCompat.getDrawable(this, R.color.text)!!)
+        listView.addItemDecoration(separator)
 
-        // Display Color View:
+        val grey = ContextCompat.getColor(this, R.color.neutralGrey)
+
         val colorView = viewBinding.colorView
-
-        // Search View:
+        val errorView = viewBinding.errorView
         val searchView = viewBinding.searchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                try {
-                    val rgb = RGB.vector(query)
-                    colorView.setBackgroundColor(Color.rgb(rgb[0], rgb[1], rgb[2]))
-                    model.search(rgb)
-                } catch (e: Exception) {
-                    displayMessage("Error:" + e.message)
-                }
+                colorView.setBackgroundColor(model.search(query)?.asInt() ?: grey)
                 searchView.clearFocus()
                 return true
             }
-            override fun onQueryTextChange(newText: String): Boolean {
-                return false
-            }
+
+            override fun onQueryTextChange(newText: String) = false
         })
     }
 
@@ -79,24 +72,28 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         model.serviceStatus.observe(this, this::onServiceStatusChanged)
         model.searchResult.observe(this, this::onSearchResultChanged)
-        model.init()
+        model.start()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        model.stop()
     }
 
     private fun onServiceStatusChanged(status: ServiceStatus) {
-        if (status.error != null) {
-            displayMessage("Error:" + status.error)
-        }
+        viewBinding.statusView.text =
+            when (status) {
+                ServiceStatus.Stopped -> getResources().getString(R.string.stopped)
+                ServiceStatus.Ready -> getResources().getString(R.string.ready)
+                ServiceStatus.Failed -> getResources().getString(R.string.failed)
+            }
     }
 
     private fun onSearchResultChanged(result: SearchResult) {
-        val adapter = viewBinding.listView.adapter as ListViewAdapter
-        adapter.updateItems(result.colors ?: emptyList())
-        if (result.error != null) {
-            displayMessage("Search Error: " + result.error)
-        }
+        displayResults(result.colors)
+        viewBinding.errorView.text = result.error
     }
 
-    private fun displayMessage(message: String?) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
+    private fun displayResults(colors: List<NamedColor>) =
+        (viewBinding.listView.adapter as ListViewAdapter).updateItems(colors)
 }

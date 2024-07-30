@@ -17,6 +17,7 @@ package com.couchbase.lite.demo.color.java;
 
 import androidx.annotation.NonNull;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,7 +35,7 @@ public class UI {
     public void run() {
         banner();
 
-        try (Scanner in = new Scanner(System.in, "UTF-8")) {
+        try (Scanner in = new Scanner(System.in, StandardCharsets.UTF_8)) {
             while (true) {
                 System.out.print("Enter color (#ffffff or 255 255 255)> ");
                 final String targetColor = in.nextLine();

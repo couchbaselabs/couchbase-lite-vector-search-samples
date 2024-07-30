@@ -6,7 +6,7 @@ The Color app illustrates the use of [Couchbase Lite Vector Search Library and A
 
 Each color can be encoded as a 3-dimension vectors or a set of three space separated numbers, with each value ranging from 0 to 255 or as a sharp sign ("#") followed by six hex digits. These three numbers correspond to the intensity of the Red (R), Green (G), and Blue (B) components that combine to create a color. For instance, the pink color is represented by `[255, 192, 203]` or `#FFC0CB` in hexadecimal format. With all possible combinations of the three numbers, the total number of colors generated is 16,581,375.
 
-To find similar colors in the color space, enter the RGB spec of the color for which to search.  The app performs a similarity search based on the euclidean distances calcuated between the search color and the database of available colors. The top 8 similar colors are returned. The app uses Couchbase Lite's Vector Index which performs the vector search efficently.
+To find similar colors in the color space, enter the RGB spec of the color for which to search.  The app performs a similarity search based on the Euclidean distances calcuated between the search color and the database of available colors. The top 8 similar colors are returned. The app uses Couchbase Lite's Vector Index which performs the vector search efficently.
 
 ### Inside the App ###
 
@@ -35,7 +35,7 @@ The app uses 3 properties from the documents:
 
 #### Building Vector Index ####
 
-When running the app for the first time, the app will load a [prebuilt database](https://docs.couchbase.com/couchbase-lite/current/swift/prebuilt-database.html) containing the dataset as described above. The app will then create a vector index from the `colorvect_l2` property of the documents in the `colors` collection. As the dataset is pretty small, the app uses a small number of centroids (2) and opts to use no vector encoding to maximize accuracy and use less computation. Note that the euclidean distance metric is selected by default. To learn more about vector index and tuning, check this [guide](https://github.com/couchbaselabs/mobile-vector-search/blob/main/docs/Tuning.md). 
+When running the app for the first time, the app will load a [prebuilt database](https://docs.couchbase.com/couchbase-lite/current/swift/prebuilt-database.html) containing the dataset as described above. The app will then create a vector index from the `colorvect_l2` property of the documents in the `colors` collection. As the dataset is pretty small, the app uses a small number of centroids (2) and opts to use no vector encoding to maximize accuracy and use less computation. Note that the Euclidean distance metric is selected by default. To learn more about vector index and tuning, check this [guide](https://github.com/couchbaselabs/mobile-vector-search/blob/main/docs/Tuning.md). 
 
 This is relevant code snippet
 ```
@@ -50,9 +50,11 @@ The app accepts colors entered in three-number or hexadecimal format and searchs
 
 This is relevant code snippet
 ```
-final Query q = db.createQuery("SELECT id, color, colorvect_l2, VECTOR_DISTANCE(colors_index) as dist"
-    + " FROM colors"
-    + " WHERE vector_match(colors_index, $vector , 8)");
+final Query q = db.createQuery(
+    "SELECT id, color, colorvect_l2, APPROX_VECTOR_DISTANCE(colorvect_l2, $vector) as dist" +
+        " FROM colors" +
+        " ORDER BY APPROX_VECTOR_DISTANCE(colorvect_l2, $vector)" +
+        " LIMIT 8");
 
 final Parameters params = new Parameters();
 params.setArray("vector", new MutableArray(color.getRGBVector()));

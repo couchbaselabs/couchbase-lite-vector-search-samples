@@ -40,6 +40,5 @@ class ColorApp : Application() {
                     viewModel { MainViewModel(get()) }
                 })
         }
-        AppService.init(this)
     }
 }

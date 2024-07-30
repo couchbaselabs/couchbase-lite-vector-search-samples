@@ -24,19 +24,19 @@ import java.util.Objects;
 
 
 
-public final class NamedColor implements Comparable<NamedColor> {
+public final class NamedColor {
     @NonNull
     private final Color color;
     @NonNull
     private final String id;
     @NonNull
     private final String name;
-    private final double distance;
+    private final int distance;
 
     public NamedColor(
         @NonNull final String id,
         @NonNull final String name,
-        final double distance,
+        final int distance,
         @NonNull final Color color) {
         this.id = id;
         this.name = name;
@@ -72,11 +72,6 @@ public final class NamedColor implements Comparable<NamedColor> {
     @NonNull
     public String toString() {
         return "Color{@" + id + ", " + name + ", " + distance + ", " + getColorCode() + "}";
-    }
-
-    @Override
-    public int compareTo(@NonNull NamedColor o) {
-        return (distance < o.distance) ? -1 : ((o.distance > distance) ? 1 : 0);
     }
 
     @Override

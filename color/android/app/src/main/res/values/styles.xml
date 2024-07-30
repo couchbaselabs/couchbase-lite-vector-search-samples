@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ColorItem">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="background">@android:color/transparent</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:background">@color/white</item>
+        <item name="android:queryBackground">@color/white</item>
+        <item name="android:closeIcon">@color/black</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:editTextColor">@color/text</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:queryHint">@string/queryHint</item>
+        <item name="android:textColorHint">@color/neutralGrey</item>
+     </style>
+
+</resources>

@@ -8,9 +8,20 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+//        // internal maven
+//        maven {
+//            url "https://proget.sc.couchbase.com/maven2/internalmaven"
+//            content { includeGroupByRegex "com\\.couchbase\\.lite.*" }
+//        }
+
+        // public maven
+        maven {
+            url "https://mobile.maven.couchbase.com/maven2/dev/"
+            content { includeGroupByRegex "com\\.couchbase\\.lite.*" }
+        }
+
         google()
         mavenCentral()
-        maven { url 'https://mobile.maven.couchbase.com/maven2/dev' }
     }
 }
 
