@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4001A1FE2BB5044E0067B507 /* CouchbaseLiteSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4001A1FD2BB5044E0067B507 /* CouchbaseLiteSwift */; };
-		4001A2012BB504830067B507 /* CouchbaseLiteVectorSearch in Frameworks */ = {isa = PBXBuildFile; productRef = 4001A2002BB504830067B507 /* CouchbaseLiteVectorSearch */; };
 		40A3314C2BB21AE3005BCE19 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A3314B2BB21AE3005BCE19 /* ContentViewModel.swift */; };
 		40A588CE2BAF446D002EEA6D /* ColorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A588CD2BAF446D002EEA6D /* ColorApp.swift */; };
 		40A588D02BAF446D002EEA6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A588CF2BAF446D002EEA6D /* ContentView.swift */; };
@@ -19,7 +17,26 @@
 		40A588F12BAFC02F002EEA6D /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A588F02BAFC02F002EEA6D /* RGB.swift */; };
 		40A588F32BAFC294002EEA6D /* Dataset in Resources */ = {isa = PBXBuildFile; fileRef = 40A588F22BAFC294002EEA6D /* Dataset */; };
 		40A588F62BAFE03C002EEA6D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A588F52BAFE03C002EEA6D /* Extensions.swift */; };
+		40FEBB0D2C5C463200483485 /* CouchbaseLiteVectorSearch.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40FEBB0B2C5C463200483485 /* CouchbaseLiteVectorSearch.xcframework */; };
+		40FEBB0E2C5C463200483485 /* CouchbaseLiteVectorSearch.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 40FEBB0B2C5C463200483485 /* CouchbaseLiteVectorSearch.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		40FEBB0F2C5C463200483485 /* CouchbaseLiteSwift.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40FEBB0C2C5C463200483485 /* CouchbaseLiteSwift.xcframework */; };
+		40FEBB102C5C463200483485 /* CouchbaseLiteSwift.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 40FEBB0C2C5C463200483485 /* CouchbaseLiteSwift.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		40FEBB112C5C463200483485 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				40FEBB0E2C5C463200483485 /* CouchbaseLiteVectorSearch.xcframework in Embed Frameworks */,
+				40FEBB102C5C463200483485 /* CouchbaseLiteSwift.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		40A3314B2BB21AE3005BCE19 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
@@ -33,6 +50,8 @@
 		40A588F02BAFC02F002EEA6D /* RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGB.swift; sourceTree = "<group>"; };
 		40A588F22BAFC294002EEA6D /* Dataset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Dataset; sourceTree = "<group>"; };
 		40A588F52BAFE03C002EEA6D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		40FEBB0B2C5C463200483485 /* CouchbaseLiteVectorSearch.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CouchbaseLiteVectorSearch.xcframework; path = Frameworks/CouchbaseLiteVectorSearch.xcframework; sourceTree = "<group>"; };
+		40FEBB0C2C5C463200483485 /* CouchbaseLiteSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CouchbaseLiteSwift.xcframework; path = Frameworks/CouchbaseLiteSwift.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,8 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4001A1FE2BB5044E0067B507 /* CouchbaseLiteSwift in Frameworks */,
-				4001A2012BB504830067B507 /* CouchbaseLiteVectorSearch in Frameworks */,
+				40FEBB0D2C5C463200483485 /* CouchbaseLiteVectorSearch.xcframework in Frameworks */,
+				40FEBB0F2C5C463200483485 /* CouchbaseLiteSwift.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +72,7 @@
 			children = (
 				40A588CC2BAF446D002EEA6D /* Color */,
 				40A588CB2BAF446D002EEA6D /* Products */,
+				40FEBB0A2C5C463200483485 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,6 +141,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		40FEBB0A2C5C463200483485 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				40FEBB0C2C5C463200483485 /* CouchbaseLiteSwift.xcframework */,
+				40FEBB0B2C5C463200483485 /* CouchbaseLiteVectorSearch.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -131,6 +160,7 @@
 				40A588C62BAF446D002EEA6D /* Sources */,
 				40A588C72BAF446D002EEA6D /* Frameworks */,
 				40A588C82BAF446D002EEA6D /* Resources */,
+				40FEBB112C5C463200483485 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -138,8 +168,6 @@
 			);
 			name = Color;
 			packageProductDependencies = (
-				4001A1FD2BB5044E0067B507 /* CouchbaseLiteSwift */,
-				4001A2002BB504830067B507 /* CouchbaseLiteVectorSearch */,
 			);
 			productName = Color;
 			productReference = 40A588CA2BAF446D002EEA6D /* Color.app */;
@@ -170,8 +198,6 @@
 			);
 			mainGroup = 40A588C12BAF446D002EEA6D;
 			packageReferences = (
-				4001A1FC2BB5044E0067B507 /* XCRemoteSwiftPackageReference "couchbase-lite-swift-ee" */,
-				4001A1FF2BB504830067B507 /* XCRemoteSwiftPackageReference "couchbase-lite-ios-vector-search-spm" */,
 			);
 			productRefGroup = 40A588CB2BAF446D002EEA6D /* Products */;
 			projectDirPath = "";
@@ -412,38 +438,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		4001A1FC2BB5044E0067B507 /* XCRemoteSwiftPackageReference "couchbase-lite-swift-ee" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/couchbase/couchbase-lite-swift-ee.git";
-			requirement = {
-				kind = exactVersion;
-				version = "3.2.0-beta.1";
-			};
-		};
-		4001A1FF2BB504830067B507 /* XCRemoteSwiftPackageReference "couchbase-lite-ios-vector-search-spm" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/couchbase/couchbase-lite-ios-vector-search-spm/";
-			requirement = {
-				kind = exactVersion;
-				version = "1.0.0-beta.1";
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		4001A1FD2BB5044E0067B507 /* CouchbaseLiteSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4001A1FC2BB5044E0067B507 /* XCRemoteSwiftPackageReference "couchbase-lite-swift-ee" */;
-			productName = CouchbaseLiteSwift;
-		};
-		4001A2002BB504830067B507 /* CouchbaseLiteVectorSearch */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4001A1FF2BB504830067B507 /* XCRemoteSwiftPackageReference "couchbase-lite-ios-vector-search-spm" */;
-			productName = CouchbaseLiteVectorSearch;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 40A588C22BAF446D002EEA6D /* Project object */;
 }

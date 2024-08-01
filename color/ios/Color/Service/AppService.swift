@@ -46,6 +46,8 @@ actor AppService {
     func initialize() throws {
         if (initialized) { return }
         
+        try Extension.enableVectorSearch()
+        
         // Load dataset:
         db = try self.loadDataset()
         
@@ -66,9 +68,9 @@ actor AppService {
         
         // Create a query object:
         if (query == nil) {
-            let sql = "SELECT id, color, colorvect_l2, VECTOR_DISTANCE(\(kIndexName)) " +
+            let sql = "SELECT id, color, colorvect_l2, APPROX_VECTOR_DISTANCE(colorvect_l2, $vector) " +
                       "FROM \(collection.fullName) " +
-                      "WHERE VECTOR_MATCH(\(kIndexName), $vector, 8)"
+                      "LIMIT 8"
             query = try db.createQuery(sql)
         }
         
