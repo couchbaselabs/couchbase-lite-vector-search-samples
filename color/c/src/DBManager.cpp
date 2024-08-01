@@ -39,11 +39,16 @@ using namespace std::filesystem;
 #define STR(str) std::string(static_cast<const char *>((str).buf), (str).size)
 
 DBManager::DBManager(Context& context) : _context(std::move(context)) {
+    // Enable Vector Search
+    CBLError error {};
+    if (!CBL_EnableVectorSearch(FLS(_context.extensionDir), &error)) {
+        throw domain_error("Vector Search Extension cannot be enabled");
+    }
+
     // Load dataset:
     _database = loadDataset();
 
     // Get the colors collection:
-    CBLError error {};
     _collection = CBLDatabase_Collection(_database, FLStr(kCollectionName), kCBLDefaultScopeName, &error);
     if (!_collection) {
         if (error.code == 0) {
@@ -74,9 +79,9 @@ vector<Color> DBManager::search(vector<float> colorVector) {
     // Create a vector search query:
     if (!_query) {
         stringstream sql;
-        sql << "SELECT id, color, VECTOR_DISTANCE(" << kIndexName << ") "
+        sql << "SELECT id, color, APPROX_VECTOR_DISTANCE(colorvect_l2, $vector)"
             << "FROM " << kCollectionName << " "
-            << "WHERE VECTOR_MATCH(" << kIndexName << ", $vector, 8)";
+            << "LIMIT 8";
 
         _query = CBLDatabase_CreateQuery(_database,kCBLN1QLLanguage,FLS(sql.str()),nullptr, &error);
         if (!_query) {
@@ -126,8 +131,6 @@ CBLDatabase* DBManager::loadDataset() const {
             throw CBLException(error);
         }
     }
-
-    CBL_SetExtensionPath(FLS(_context.extensionDir));
 
     auto db = CBLDatabase_Open(FLStr(kDatabaseName), &config, &error);
     if (!db) {
